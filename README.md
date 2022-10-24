@@ -1,4 +1,5 @@
 # STM32G4 Toolchain
+[![ci](https://github.com/dronectl/stm32g431-toolchain/actions/workflows/ci.yaml/badge.svg)](https://github.com/dronectl/stm32g431-toolchain/actions/workflows/ci.yaml)
 
 Modified: 2022-10
 
