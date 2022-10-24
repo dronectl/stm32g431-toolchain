@@ -1,4 +1,4 @@
-# STM32G4 Toolchain
+# STM32G431 Toolchain
 [![ci](https://github.com/dronectl/stm32g431-toolchain/actions/workflows/ci.yaml/badge.svg)](https://github.com/dronectl/stm32g431-toolchain/actions/workflows/ci.yaml)
 
 Modified: 2022-10
@@ -8,7 +8,8 @@ A toolchain for baremetal development of STM32G4 microcontrollers.
 ## Navigation
 1. [Software Requirements](#software-requirements)
 2. [Quickstart](#quickstart)
-3. [License](#license)
+3. [Documentation](#documentation)
+4. [License](#license)
 
 ## Software Requirements
 This toolchain leverages the following software tools:
@@ -45,6 +46,9 @@ make flash
 > OpenOCD automatically detects STLINK debugger interfaces over USB. 
 
 ![img](/docs/demo.gif)
+
+## Documentation
+This repository sources the accompanying reference documentation for doing baremetal programming on the STM32G431xx microcontroller. You can download the pdfs [here](docs/)
 
 ## License
 This project is licensed under the terms of the [MIT License](LICENSE)
