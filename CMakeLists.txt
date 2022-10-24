@@ -69,4 +69,4 @@ add_custom_target(${EXECUTABLE}-size DEPENDS ${EXECUTABLE} COMMAND ${ARM_SIZE} -
 add_custom_target(hex ALL ${ARM_OBJCPY} -O ihex ${EXECUTABLE}.elf ${EXECUTABLE}.hex DEPENDS ${EXECUTABLE})
 add_custom_target(bin ALL ${ARM_OBJCPY} -O binary -S ${EXECUTABLE}.elf ${EXECUTABLE}.bin DEPENDS ${EXECUTABLE})
 add_custom_target(objdump ${ARM_OBJDUMP} -S ${EXECUTABLE}.elf DEPENDS ${EXECUTABLE})
-add_custom_target(flash DEPENDS ${EXECUTABLE}-size COMMAND ${OPENOCD} -f ${OPENOCD_CONFIG})
+add_custom_target(flash DEPENDS ${EXECUTABLE}-size COMMAND ${OPENOCD} -finterface/stlink.cfg -ftarget/stm32g4x.cfg -c "program demo.elf verify reset exit")
