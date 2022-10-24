@@ -24,12 +24,12 @@ Clone this repository and navigate to the repository root:
 git clone git@github.com:dronectl/stm32g431-toolchain.git
 cd stm32g431-toolchain
 ```
-Initialize the build system using `cmake`:
+Initialize the build system using `cmake`. Export compile commands to configure Intellisense:
 ```bash
 mkdir build
 cd build
 # pass the basepath of the STM32CUBEG4 install directory
-cmake .. -DSTM32CUBEG4_BASE=/path/to/STM32CubeG4
+cmake .. -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DSTM32CUBEG4_BASE=/Applications/stm/g4/STM32CubeG4
 ...
 ```
 Compile the firmware
