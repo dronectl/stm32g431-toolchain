@@ -8,10 +8,8 @@ static void __delay(uint64_t delay) {
 int main(void) {
   // enable clock on port C gpio
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
-
   // setup pin 6 of port C as output
   GPIOC->MODER &= ~(~GPIO_MODER_MODE6_0 & GPIO_MODER_MODE6_Msk);
-
   // status blinker
   while (1) {
     GPIOC->BSRR = 1 << 6;
