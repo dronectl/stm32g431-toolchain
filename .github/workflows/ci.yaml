@@ -1,0 +1,58 @@
+---
+name: ci
+on:
+  push:
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
+      - "dev/**"
+    branches:
+      - master
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - master
+
+jobs:
+  build:
+    name: build & upload firmware
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout source
+        uses: actions/checkout@v3
+      - name: fetch stm32g4 clib
+        uses: actions/checkout@v3
+        with:
+          repository: STMicroelectronics/STM32CubeG4
+          # relative to $GITHUB_WORKSPACE 
+          path: stm32cubeg4
+      - name: update and install apt dependancies
+        run: |
+          sudo apt update -y
+          sudo apt install -y gcc-arm-none-eabi
+        env:
+          DEBIAN_FRONTEND: noninteractive
+      - name: setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: '3.22.x'
+      - name: build
+        run: |
+          mkdir $GITHUB_WORKSPACE/build
+          cd build
+          cmake .. -DSTM32CUBEG4_BASE=$GITHUB_WORKSPACE/stm32cubeg4
+          make -j4
+      - name: binary size details
+        working-directory: build 
+        run: make demo-size
+      - name: binary object dump
+        working-directory: build 
+        run: make objdump
+      - name: archive binary 
+        uses: actions/upload-artifact@v3
+        with:
+          name: demo
+          # relative to $GITHUB_WORKSPACE 
+          path: build/demo.*
+          retention-days: 5
